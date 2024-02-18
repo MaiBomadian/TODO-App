@@ -7,7 +7,7 @@ class SettingsProvider extends ChangeNotifier {
   int currentIndex = 0;
   String currentLanguage = 'en';
   List<Widget> screens = [
-    const TasksView(),
+     TasksView(),
     SettingsView(),
   ];
 
