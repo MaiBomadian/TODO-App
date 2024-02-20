@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/config/constants/application_theme_manager.dart';
-import 'package:todo_app/config/constants/settings_provider.dart';
+import 'package:todo_app/core/config/constants/application_theme_manager.dart';
+import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/features/layout_view.dart';
+import 'package:todo_app/features/login/pages/login_view.dart';
+import 'package:todo_app/features/register/register_view.dart';
 import 'package:todo_app/features/splash/pages/splash_view.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,6 +36,9 @@ class TodoApp extends StatelessWidget {
       routes: {
         SplashView.routeName: (context) => const SplashView(),
         LayoutView.routeName: (context) => const LayoutView(),
+        LoginView.routeName:(context)=>  LoginView(),
+        RegisterView.routeName:(context)=>  RegisterView(),
+
       },
     );
   }

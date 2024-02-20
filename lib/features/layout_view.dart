@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/config/constants/settings_provider.dart';
+import 'package:todo_app/core/config/constants/settings_provider.dart';
 
 class LayoutView extends StatelessWidget {
   const LayoutView({Key? key}) : super(key: key);

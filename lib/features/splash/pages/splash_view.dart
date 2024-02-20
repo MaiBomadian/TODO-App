@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/config/constants/settings_provider.dart';
+import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/features/layout_view.dart';
+
+import '../../login/pages/login_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, LayoutView.routeName);
+      Navigator.pushReplacementNamed(context, LoginView.routeName);
     });
     super.initState();
   }

@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 class ApplicationThemeManager {
   static Color primaryColor = const Color(0xff5D9CEC);
   static ThemeData lightTheme = ThemeData(
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+    ),
     primaryColor: primaryColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,
@@ -69,6 +76,13 @@ class ApplicationThemeManager {
   static ThemeData darkTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: const Color(0xff060E1E),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Color(0xff060E1E),
+      ),
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,
       iconSize: 30,
