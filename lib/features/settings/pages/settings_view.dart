@@ -36,7 +36,8 @@ class SettingsView extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 38, top: 20, bottom: 20,right: 30),
+          padding:
+              const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
             locale.language,
             style: theme.textTheme.bodySmall,
@@ -45,17 +46,20 @@ class SettingsView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 50.0, right: 40),
           child: CustomDropdown(
-            initialItem: vm.currentLanguage =='en'? 'English' : 'عربي',
+            initialItem: vm.currentLanguage == 'en' ? 'English' : 'عربي',
             items: language,
             onChanged: (value) {
-              if(value=='English'){
+              if (value == 'English') {
                 vm.changeLanguage('en');
-              }
-              else if(value=='عربي'){
+              } else if (value == 'عربي') {
                 vm.changeLanguage('ar');
               }
             },
             decoration: CustomDropdownDecoration(
+              headerStyle: TextStyle(color: theme.primaryColor),
+              closedBorder: Border.all(
+                color: theme.primaryColor,
+              ),
               closedBorderRadius: BorderRadius.zero,
               expandedBorderRadius: BorderRadius.zero,
               closedFillColor: vm.currentTheme == ThemeMode.dark
@@ -67,7 +71,7 @@ class SettingsView extends StatelessWidget {
               closedSuffixIcon: Icon(
                 Icons.keyboard_arrow_down,
                 color: vm.currentTheme == ThemeMode.light
-                    ? Colors.black
+                    ? theme.primaryColor
                     : Colors.black,
               ),
               expandedSuffixIcon:
@@ -76,7 +80,8 @@ class SettingsView extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 38, top: 20, bottom: 20,right: 30),
+          padding:
+              const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
             locale.mode,
             style: theme.textTheme.bodySmall,
@@ -95,6 +100,8 @@ class SettingsView extends StatelessWidget {
               }
             },
             decoration: CustomDropdownDecoration(
+              headerStyle: TextStyle(color: theme.primaryColor),
+              closedBorder: Border.all(color: theme.primaryColor),
               closedFillColor: vm.currentTheme == ThemeMode.dark
                   ? const Color(0xff141922)
                   : Colors.white,
@@ -106,7 +113,7 @@ class SettingsView extends StatelessWidget {
               closedSuffixIcon: Icon(
                 Icons.keyboard_arrow_down,
                 color: vm.currentTheme == ThemeMode.light
-                    ? Colors.black
+                    ? theme.primaryColor
                     : Colors.black,
               ),
               expandedSuffixIcon: Icon(

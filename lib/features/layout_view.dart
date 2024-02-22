@@ -10,6 +10,7 @@ class LayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     var vm = Provider.of<SettingsProvider>(context);
     return Scaffold(
+      extendBody: true,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(
