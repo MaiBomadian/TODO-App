@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/features/register/register_view.dart';
+import 'package:todo_app/features/firebase_services.dart';
+import 'package:todo_app/features/register/pages/register_view.dart';
 
 import '../../../core/config/constants/settings_provider.dart';
 import '../../../core/widgets/text_form_field.dart';
+import '../../layout_view.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
@@ -73,7 +76,8 @@ class LoginView extends StatelessWidget {
                       return null;
                     },
                     hintText: 'Enter your e-mail address',
-                    hintColor: vm.isDark()? Colors.grey.shade600 : Colors.black54,
+                    hintColor:
+                        vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
                     suffixWidget: const Icon(Icons.email_rounded),
                   ),
@@ -85,7 +89,6 @@ class LoginView extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
-
                     controller: passwordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -95,7 +98,8 @@ class LoginView extends StatelessWidget {
                       return null;
                     },
                     hintText: 'Enter your password',
-                    hintColor: vm.isDark()? Colors.grey.shade600 : Colors.black54,
+                    hintColor:
+                        vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
                     maxLines: 1,
                     isPassword: true,
@@ -105,7 +109,17 @@ class LoginView extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        FirebaseService().signInWithUserAccount(
+                          emailController.text,
+                          passwordController.text,
+                        ).then((value) => {
+                          if(value == true){
+                            EasyLoading.dismiss(),
+                            Navigator.of(context).pushReplacementNamed(LayoutView.routeName),
+                          }
+                        });
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(

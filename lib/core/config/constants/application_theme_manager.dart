@@ -56,19 +56,19 @@ class ApplicationThemeManager {
       bodyMedium: TextStyle(
         fontSize: 18,
         color: Colors.black,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
         fontFamily: 'Poppins',
       ),
       bodySmall: TextStyle(
         fontSize: 14,
         color: Colors.black,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
         fontFamily: 'Poppins',
       ),
       displayLarge: TextStyle(
         fontSize: 15,
         color: Colors.black,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Poppins',
       ),
     ),
@@ -127,13 +127,13 @@ class ApplicationThemeManager {
       bodyMedium: TextStyle(
         fontSize: 18,
         color: Colors.white,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
         fontFamily: 'Poppins',
       ),
       bodySmall: TextStyle(
         fontSize: 14,
         color: Colors.white,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
         fontFamily: 'Poppins',
       ),
       displayLarge: TextStyle(

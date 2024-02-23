@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/features/settings/pages/settings_view.dart';
-import 'package:todo_app/features/tasks/pages/tasks_view.dart';
+
+import '../../../features/tasks/pages/task_view.dart';
 
 class SettingsProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;

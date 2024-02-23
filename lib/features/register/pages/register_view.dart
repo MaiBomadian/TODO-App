@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/features/firebase_services.dart';
 import 'package:todo_app/features/layout_view.dart';
+import 'package:todo_app/features/login/pages/login_view.dart';
 
-import '../../core/config/constants/settings_provider.dart';
-import '../../core/widgets/text_form_field.dart';
+import '../../../core/config/constants/settings_provider.dart';
+import '../../../core/widgets/text_form_field.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({Key? key}) : super(key: key);
@@ -61,9 +64,16 @@ class RegisterView extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
+                    onValidate: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter your full name';
+                      }
+                      return null;
+                    },
                     controller: nameController,
                     hintText: 'Enter your Full Name',
-                    hintColor: vm.isDark()? Colors.grey.shade600 : Colors.black54,
+                    hintColor:
+                        vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
                     suffixWidget: const Icon(Icons.person),
                   ),
@@ -88,7 +98,8 @@ class RegisterView extends StatelessWidget {
                       return null;
                     },
                     hintText: 'Enter your e-mail address',
-                    hintColor: vm.isDark()? Colors.grey.shade600 : Colors.black54,
+                    hintColor:
+                        vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
                     suffixWidget: Icon(Icons.email_rounded),
                   ),
@@ -113,7 +124,8 @@ class RegisterView extends StatelessWidget {
                       return null;
                     },
                     hintText: 'Enter your password',
-                    hintColor: vm.isDark()? Colors.grey.shade600 : Colors.black54,
+                    hintColor:
+                        vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
                     maxLines: 1,
                     isPassword: true,
@@ -137,7 +149,8 @@ class RegisterView extends StatelessWidget {
                       return null;
                     },
                     hintText: 'Confirm your password',
-                    hintColor: vm.isDark()? Colors.grey.shade600 : Colors.black54,
+                    hintColor:
+                        vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
                     maxLines: 1,
                     isPassword: true,
@@ -148,7 +161,20 @@ class RegisterView extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        Navigator.pushNamed(context, LayoutView.routeName);
+                        FirebaseService().createUserAccount(
+                          emailController.text,
+                          passwordController.text,
+                        ).then((value) => {
+                          if(value == true){
+                            EasyLoading.dismiss(),
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              LoginView.routeName,
+                                  (route) => false,
+                            ),
+
+                          }
+                        });
                       }
                     },
                     style: ElevatedButton.styleFrom(

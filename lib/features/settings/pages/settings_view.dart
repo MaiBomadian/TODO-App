@@ -2,7 +2,7 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/config/constants/settings_provider.dart';
+import '../../../../core/config/constants/settings_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsView extends StatelessWidget {
@@ -40,7 +40,8 @@ class SettingsView extends StatelessWidget {
               const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
             locale.language,
-            style: theme.textTheme.bodySmall,
+            style: theme.textTheme.bodySmall
+                ?.copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         Padding(
@@ -56,10 +57,11 @@ class SettingsView extends StatelessWidget {
               }
             },
             decoration: CustomDropdownDecoration(
-              headerStyle: TextStyle(color: theme.primaryColor),
-              closedBorder: Border.all(
-                color: theme.primaryColor,
-              ),
+              closedBorder: Border.all(color: theme.primaryColor),
+              listItemStyle: theme.textTheme.bodySmall
+                  ?.copyWith(color: theme.primaryColor),
+              headerStyle: theme.textTheme.bodySmall
+                  ?.copyWith(color: theme.primaryColor),
               closedBorderRadius: BorderRadius.zero,
               expandedBorderRadius: BorderRadius.zero,
               closedFillColor: vm.currentTheme == ThemeMode.dark
@@ -84,24 +86,20 @@ class SettingsView extends StatelessWidget {
               const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
             locale.mode,
-            style: theme.textTheme.bodySmall,
+            style: theme.textTheme.bodySmall
+                ?.copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 50.0, right: 40),
           child: CustomDropdown(
-            initialItem: vm.currentTheme == ThemeMode.dark ? 'Dark' : 'Light',
-            items: themeLits,
-            onChanged: (value) {
-              if (value == 'Dark') {
-                vm.changeTheme(ThemeMode.dark);
-              } else if (value == 'Light') {
-                vm.changeTheme(ThemeMode.light);
-              }
-            },
             decoration: CustomDropdownDecoration(
-              headerStyle: TextStyle(color: theme.primaryColor),
+
               closedBorder: Border.all(color: theme.primaryColor),
+              listItemStyle: theme.textTheme.bodySmall
+                  ?.copyWith(color: theme.primaryColor),
+              headerStyle: theme.textTheme.bodySmall
+                  ?.copyWith(color: theme.primaryColor),
               closedFillColor: vm.currentTheme == ThemeMode.dark
                   ? const Color(0xff141922)
                   : Colors.white,
@@ -121,9 +119,18 @@ class SettingsView extends StatelessWidget {
                 color: theme.primaryColor,
               ),
             ),
+            initialItem: vm.currentTheme == ThemeMode.dark ? 'Dark' : 'Light',
+            items: themeLits,
+            onChanged: (value) {
+              if (value == 'Dark') {
+                vm.changeTheme(ThemeMode.dark);
+              } else if (value == 'Light') {
+                vm.changeTheme(ThemeMode.light);
+              }
+            },
           ),
         ),
-      ],
+        ],
     );
   }
 }
