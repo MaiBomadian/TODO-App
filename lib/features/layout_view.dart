@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/config/constants/settings_provider.dart';
+import 'package:todo_app/core/config/constants/settings_provider.dart';
+import 'package:todo_app/features/task_bottom_sheet.dart';
 
 class LayoutView extends StatelessWidget {
   const LayoutView({Key? key}) : super(key: key);
@@ -10,8 +11,15 @@ class LayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     var vm = Provider.of<SettingsProvider>(context);
     return Scaffold(
+      extendBody: true,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            isDismissible: true,
+            backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) =>  TaskBottomSheet());
+        },
         child: const Icon(
           Icons.add,
           color: Colors.white,

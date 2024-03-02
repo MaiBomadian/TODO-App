@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 class ApplicationThemeManager {
   static Color primaryColor = const Color(0xff5D9CEC);
   static ThemeData lightTheme = ThemeData(
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+    ),
     primaryColor: primaryColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,
@@ -49,19 +56,19 @@ class ApplicationThemeManager {
       bodyMedium: TextStyle(
         fontSize: 18,
         color: Colors.black,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
         fontFamily: 'Poppins',
       ),
       bodySmall: TextStyle(
         fontSize: 14,
         color: Colors.black,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
         fontFamily: 'Poppins',
       ),
       displayLarge: TextStyle(
         fontSize: 15,
         color: Colors.black,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Poppins',
       ),
     ),
@@ -69,6 +76,13 @@ class ApplicationThemeManager {
   static ThemeData darkTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: const Color(0xff060E1E),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Color(0xff060E1E),
+      ),
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,
       iconSize: 30,
@@ -113,13 +127,13 @@ class ApplicationThemeManager {
       bodyMedium: TextStyle(
         fontSize: 18,
         color: Colors.white,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
         fontFamily: 'Poppins',
       ),
       bodySmall: TextStyle(
         fontSize: 14,
         color: Colors.white,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w400,
         fontFamily: 'Poppins',
       ),
       displayLarge: TextStyle(
