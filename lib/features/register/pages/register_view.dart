@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/features/firebase_services.dart';
+import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/features/layout_view.dart';
 import 'package:todo_app/features/login/pages/login_view.dart';
 

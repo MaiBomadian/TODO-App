@@ -9,7 +9,6 @@ import 'package:todo_app/features/layout_view.dart';
 import 'package:todo_app/features/login/pages/login_view.dart';
 import 'package:todo_app/features/register/pages/register_view.dart';
 import 'package:todo_app/features/splash/pages/splash_view.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

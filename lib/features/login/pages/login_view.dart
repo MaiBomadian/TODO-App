@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/features/firebase_services.dart';
+import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/features/register/pages/register_view.dart';
 
 import '../../../core/config/constants/settings_provider.dart';

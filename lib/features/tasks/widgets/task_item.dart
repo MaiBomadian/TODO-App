@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_model.dart';
 
 import '../../../core/config/constants/settings_provider.dart';
 
 class CustomTaskItem extends StatelessWidget {
-  const CustomTaskItem({
+   CustomTaskItem({
     super.key,
+    required this.taskModel
   });
+  TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -26,43 +30,55 @@ class CustomTaskItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 4,
-            height: 62,
+            width: 6,
+            height: 90,
             decoration: BoxDecoration(
               color: theme.primaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Play basket ball',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.primaryColor,
-                  fontWeight: FontWeight.w700,
+          const SizedBox(width: 15),
+          Expanded(
+            flex: 5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  taskModel.title,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.primaryColor,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.alarm,
-                    color: vm.isDark() ? Colors.white : Colors.black,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    '10:30 AM',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w400,
+                Text(
+                  taskModel.description,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: vm.isDark()? Colors.white: Colors.black,
+                  ),),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.alarm,
+                      color: vm.isDark() ? Colors.white : Colors.black,
                     ),
-                  ),
-                ],
-              )
-            ],
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      DateFormat.yMMMMd().format(taskModel.dateTime),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
+          const SizedBox(width: 10),
           Container(
             height: 35,
             width: 70,
