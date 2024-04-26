@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/core/config/constants/application_theme_manager.dart';
 import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/core/services/loading_service.dart';
+import 'package:todo_app/features/edit/pages/edit_task_view.dart';
 import 'package:todo_app/features/layout_view.dart';
 import 'package:todo_app/features/login/pages/login_view.dart';
 import 'package:todo_app/features/register/pages/register_view.dart';
@@ -19,7 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(ChangeNotifierProvider(
-    create: (context) => SettingsProvider(),
+    create: (context) => SettingsProvider()..getLanguage()..getTheme(),
     child: const TodoApp(),
   ));
   configLoading();
@@ -49,6 +50,7 @@ class TodoApp extends StatelessWidget {
         LayoutView.routeName: (context) => const LayoutView(),
         LoginView.routeName: (context) => LoginView(),
         RegisterView.routeName: (context) => RegisterView(),
+        EditTask.routeName: (context) => const EditTask(),
       },
     );
   }

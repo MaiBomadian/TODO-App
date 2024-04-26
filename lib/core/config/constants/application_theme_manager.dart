@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ApplicationThemeManager {
   static Color primaryColor = const Color(0xff5D9CEC);
   static ThemeData lightTheme = ThemeData(
+    useMaterial3: false,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0,

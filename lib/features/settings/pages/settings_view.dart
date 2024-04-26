@@ -1,14 +1,13 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../core/config/constants/settings_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
   final List<String> language = ['English', 'عربي'];
-  final List<String> themeLits = [
+  final List<String> themeList = [
     'Light',
     'Dark',
   ];
@@ -120,7 +119,7 @@ class SettingsView extends StatelessWidget {
               ),
             ),
             initialItem: vm.currentTheme == ThemeMode.dark ? 'Dark' : 'Light',
-            items: themeLits,
+            items: themeList,
             onChanged: (value) {
               if (value == 'Dark') {
                 vm.changeTheme(ThemeMode.dark);

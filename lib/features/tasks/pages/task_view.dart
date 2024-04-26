@@ -93,7 +93,7 @@ class _TasksViewState extends State<TasksView> {
             onDateChange: (selectedDate) {
               setState(() {
                 focusTime = selectedDate;
-                vm.selectedDate  = focusTime;
+                vm.selectedDate = focusTime;
               });
             },
           ),
@@ -136,7 +136,7 @@ class _TasksViewState extends State<TasksView> {
       //       );
       //     }),
       StreamBuilder<QuerySnapshot<TaskModel>>(
-          stream:FirebaseService().getStreamDataFromFireStore(vm.selectedDate),
+          stream: FirebaseService().getStreamDataFromFireStore(vm.selectedDate),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Column(
@@ -156,13 +156,16 @@ class _TasksViewState extends State<TasksView> {
                 ),
               );
             }
-            var tasksList = snapshot.data?.docs.map((e) => e.data()).toList()?? [];
+            var tasksList =
+                snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
 
             return Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
-                itemBuilder: (context,index){
-                  return  CustomTaskItem(taskModel: tasksList[index],);
+                itemBuilder: (context, index) {
+                  return CustomTaskItem(
+                    taskModel: tasksList[index],
+                  );
                 },
                 itemCount: tasksList.length,
               ),

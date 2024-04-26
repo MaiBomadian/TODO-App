@@ -15,10 +15,10 @@ class LayoutView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-            isDismissible: true,
-            backgroundColor: Colors.transparent,
+              isDismissible: true,
+              backgroundColor: Colors.transparent,
               context: context,
-              builder: (context) =>  TaskBottomSheet());
+              builder: (context) => TaskBottomSheet());
         },
         child: const Icon(
           Icons.add,
