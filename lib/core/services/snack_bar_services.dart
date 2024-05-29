@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:todo_app/core/config/constants/constants.dart';
 
 class SnackBarService {
   static void showSuccessMessage(String msg) {
@@ -49,11 +50,11 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Success",
+                       Text(
+                        Constants.locale.success,
                         textAlign: TextAlign.start,
                         maxLines: 3,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -81,10 +82,10 @@ class SnackBarService {
                   flex: 1,
                   child: IconButton(
                     onPressed: cancelFunc,
-                    icon: const Text(
-                      "close",
+                    icon:  Text(
+                      Constants.locale.close,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black54),
+                      style: const TextStyle(color: Colors.black54),
                     ),
                   ),
                 ),

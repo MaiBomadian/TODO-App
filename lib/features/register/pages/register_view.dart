@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
-import 'package:todo_app/features/layout_view.dart';
-import 'package:todo_app/features/login/pages/login_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/config/constants/constants.dart';
 import '../../../core/config/constants/settings_provider.dart';
 import '../../../core/widgets/text_form_field.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({Key? key}) : super(key: key);
-
-  static const String routeName = 'RegisterScreen';
 
   var formKey = GlobalKey<FormState>();
 
@@ -28,6 +27,7 @@ class RegisterView extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
+
     return Container(
       padding: const EdgeInsets.only(top: 28),
       decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class RegisterView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            'Create Account',
+            Constants.locale.createAccount,
             style: theme.textTheme.titleLarge,
           ),
           centerTitle: true,
@@ -60,18 +60,18 @@ class RegisterView extends StatelessWidget {
                     height: mediaQuery.height * .2,
                   ),
                   Text(
-                    'Full Name',
+                    Constants.locale.fullName,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'Please enter your full name';
+                        return Constants.locale.enterYourFullName;
                       }
                       return null;
                     },
                     controller: nameController,
-                    hintText: 'Enter your Full Name',
+                    hintText: Constants.locale.enterYourFullName,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
@@ -81,49 +81,49 @@ class RegisterView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'E-mail',
+                    Constants.locale.email,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: emailController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'you must enter your e-mail';
+                        return Constants.locale.youMustEnterYourEmail;
                       }
                       var regex = RegExp(
                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                       if (!regex.hasMatch(value)) {
-                        return "Invalid e-mail address";
+                        return Constants.locale.invalidEmailAddress;
                       }
                       return null;
                     },
-                    hintText: 'Enter your e-mail address',
+                    hintText: Constants.locale.enterYourEmailAddress,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
-                    suffixWidget: Icon(Icons.email_rounded),
+                    suffixWidget: const Icon(Icons.email_rounded),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   Text(
-                    'Password',
+                    Constants.locale.password,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: passwordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'you must enter your password !';
+                        return Constants.locale.youMustEnterYourPassword;
                       }
                       var regex = RegExp(
                           r"(?=^.{8,}$)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$");
                       if (!regex.hasMatch(value)) {
-                        return 'Invalid password';
+                        return Constants.locale.invalidPassword;
                       }
                       return null;
                     },
-                    hintText: 'Enter your password',
+                    hintText: Constants.locale.enterYourPassword,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
@@ -134,21 +134,21 @@ class RegisterView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'Confirm Password',
+                    Constants.locale.confirmPassword,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: confirmPasswordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return 'you must enter your password !';
+                        return Constants.locale.youMustEnterYourPassword;
                       }
                       if (value != passwordController.text) {
-                        return 'password does not match';
+                        return Constants.locale.passwordDoesNotMatch;
                       }
                       return null;
                     },
-                    hintText: 'Confirm your password',
+                    hintText: Constants.locale.confirmPassword,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
@@ -161,20 +161,21 @@ class RegisterView extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        FirebaseService().createUserAccount(
-                          emailController.text,
-                          passwordController.text,
-                        ).then((value) => {
-                          if(value == true){
-                            EasyLoading.dismiss(),
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              LoginView.routeName,
-                                  (route) => false,
-                            ),
-
-                          }
-                        });
+                        FirebaseService()
+                            .createUserAccount(
+                              emailController.text,
+                              passwordController.text,
+                            )
+                            .then((value) => {
+                                  if (value == true)
+                                    {
+                                      EasyLoading.dismiss(),
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context,
+                                          PageRoutesName.login,
+                                          (route) => false)
+                                    }
+                                });
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -189,7 +190,7 @@ class RegisterView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Create Account',
+                          Constants.locale.createAccount,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: Colors.white,
                             fontSize: 16,

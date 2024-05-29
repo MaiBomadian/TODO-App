@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/core/config/constants/application_theme_manager.dart';
+import 'package:todo_app/core/config/constants/page_routes.dart';
+import 'package:todo_app/core/config/constants/routes.dart';
 import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/core/services/loading_service.dart';
 import 'package:todo_app/features/edit/pages/edit_task_view.dart';
@@ -13,6 +15,7 @@ import 'package:todo_app/features/splash/pages/splash_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +39,7 @@ class TodoApp extends StatelessWidget {
       builder: EasyLoading.init(
         builder: BotToastInit(),
       ),
+      navigatorKey: navigatorKey,
       navigatorObservers: [BotToastNavigatorObserver()],
       locale: Locale(vm.currentLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -44,14 +48,9 @@ class TodoApp extends StatelessWidget {
       themeMode: vm.currentTheme,
       theme: ApplicationThemeManager.lightTheme,
       darkTheme: ApplicationThemeManager.darkTheme,
-      initialRoute: SplashView.routeName,
-      routes: {
-        SplashView.routeName: (context) => const SplashView(),
-        LayoutView.routeName: (context) => const LayoutView(),
-        LoginView.routeName: (context) => LoginView(),
-        RegisterView.routeName: (context) => RegisterView(),
-        EditTask.routeName: (context) => const EditTask(),
-      },
+      initialRoute: PageRoutesName.splash,
+      onGenerateRoute: Routes.onGenerate,
+
     );
   }
 }

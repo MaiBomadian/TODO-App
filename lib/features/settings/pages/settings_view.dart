@@ -1,8 +1,8 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/config/constants/constants.dart';
 import '../../../../core/config/constants/settings_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
@@ -17,7 +17,6 @@ class SettingsView extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
-    var locale = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +28,7 @@ class SettingsView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 51, vertical: 60),
             child: Text(
-              locale.settings,
+              Constants.locale.settings,
               style: theme.textTheme.titleLarge,
             ),
           ),
@@ -38,7 +37,7 @@ class SettingsView extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
-            locale.language,
+            Constants.locale.language,
             style: theme.textTheme.bodySmall
                 ?.copyWith(fontWeight: FontWeight.w700),
           ),
@@ -84,7 +83,7 @@ class SettingsView extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
-            locale.mode,
+            Constants.locale.mode,
             style: theme.textTheme.bodySmall
                 ?.copyWith(fontWeight: FontWeight.w700),
           ),

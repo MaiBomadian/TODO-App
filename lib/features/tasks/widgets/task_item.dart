@@ -3,6 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/config/constants/constants.dart';
+import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/features/edit/pages/edit_task_view.dart';
 import 'package:todo_app/models/task_model.dart';
@@ -41,14 +43,15 @@ class CustomTaskItem extends StatelessWidget {
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,
-              label: 'Delete',
+              label: Constants.locale.delete,
               borderRadius: BorderRadius.circular(15),
             ),
           ],
         ),
         child: InkWell(
           onTap: () {
-            Navigator.pushReplacementNamed(context, EditTask.routeName,arguments: taskModel);
+            Navigator.pushReplacementNamed(context, PageRoutesName.edit,
+                arguments: taskModel);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -118,7 +121,7 @@ class CustomTaskItem extends StatelessWidget {
                 const SizedBox(width: 10),
                 if (taskModel.isDone)
                   Text(
-                    'Done !',
+                    Constants.locale.done,
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: taskModel.isDone
                           ? const Color(0xff61E757)

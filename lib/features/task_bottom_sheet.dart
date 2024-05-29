@@ -3,10 +3,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/core/config/constants/settings_provider.dart';
-import 'package:todo_app/core/services/snack_bar_services.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/models/task_model.dart';
 
+import '../core/config/constants/constants.dart';
 import '../core/widgets/text_form_field.dart';
 
 class TaskBottomSheet extends StatefulWidget {
@@ -45,7 +45,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Add new Task',
+              Constants.locale.addNewTask,
               style:
                   TextStyle(color: vm.isDark() ? Colors.white : Colors.black),
               textAlign: TextAlign.center,
@@ -55,11 +55,11 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
             ),
             CustomTextFormField(
               controller: titleController,
-              hintText: 'enter your task title',
-              hintColor:Colors.grey.shade600,
+              hintText: Constants.locale.enterYourTaskTitle,
+              hintColor: Colors.grey.shade600,
               onValidate: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
+                  return Constants.locale.thisFieldIsRequired;
                 }
                 return null;
               },
@@ -69,13 +69,13 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
             ),
             CustomTextFormField(
               controller: descriptionController,
-              hintText: 'enter your description',
+              hintText: Constants.locale.enterYourTaskDescription,
               hintColor: Colors.grey.shade600,
               maxLines: 3,
               maxLength: 200,
               onValidate: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
+                  return Constants.locale.thisFieldIsRequired;
                 }
                 return null;
               },
@@ -84,9 +84,9 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
               height: 16,
             ),
             Text(
-              'Select Time',
-              style: theme.textTheme.bodyLarge?.copyWith(color:vm.isDark()? const Color(0xffC3C3C3):Colors.black),
-
+              Constants.locale.selectTime,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                  color: vm.isDark() ? const Color(0xffC3C3C3) : Colors.black),
             ),
             const SizedBox(
               height: 16,
@@ -128,7 +128,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 }
               },
               child: Text(
-                'Add Task',
+                Constants.locale.addTask,
                 textAlign: TextAlign.center,
                 style:
                     theme.textTheme.bodyMedium?.copyWith(color: Colors.white),
