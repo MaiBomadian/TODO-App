@@ -5,7 +5,6 @@ import 'package:todo_app/features/task_bottom_sheet.dart';
 
 class LayoutView extends StatelessWidget {
   const LayoutView({Key? key}) : super(key: key);
-  static const String routeName = 'Home';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class LayoutView extends StatelessWidget {
               isDismissible: true,
               backgroundColor: Colors.transparent,
               context: context,
-              builder: (context) => TaskBottomSheet());
+              builder: (context) => const TaskBottomSheet());
         },
         child: const Icon(
           Icons.add,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:todo_app/core/config/constants/constants.dart';
 import 'package:todo_app/models/task_model.dart';
 
 class FirebaseService {
@@ -15,10 +16,10 @@ class FirebaseService {
       print(credential.user?.email);
       return (Future.value(true));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+      if (e.code == Constants.locale.weakPassword) {
+        print(Constants.locale.thePasswordProvidedIsTooWeak);
+      } else if (e.code == Constants.locale.emailAlreadyInUse) {
+        print(Constants.locale.theAccountAlreadyExistsForThatEmail);
       }
       EasyLoading.dismiss();
       return (Future.value(false));
@@ -39,11 +40,11 @@ class FirebaseService {
       print(credential.user?.email);
       return (Future.value(true));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        if (e.code == Constants.locale.userNotFound) {
+        print(Constants.locale.noUserFoundForThatEmail);
         EasyLoading.dismiss();
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+      } else if (e.code == Constants.locale.wrongPassword) {
+        print(Constants.locale.wrongPasswordProvidedForThatUser);
         EasyLoading.dismiss();
       }
       return (Future.value(false));

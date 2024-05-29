@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
-import 'package:todo_app/features/register/pages/register_view.dart';
-
+import '../../../core/config/constants/constants.dart';
 import '../../../core/config/constants/settings_provider.dart';
 import '../../../core/widgets/text_form_field.dart';
-import '../../layout_view.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
-  static const String routeName = 'LoginScreen';
 
   var formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
@@ -21,6 +19,7 @@ class LoginView extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
+
     return Container(
       padding: const EdgeInsets.only(top: 28),
       decoration: BoxDecoration(
@@ -36,7 +35,7 @@ class LoginView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            'Login',
+            Constants.locale.login,
             style: theme.textTheme.titleLarge,
           ),
           centerTitle: true,
@@ -53,7 +52,7 @@ class LoginView extends StatelessWidget {
                     height: mediaQuery.height * .2,
                   ),
                   Text(
-                    'Welcome back!',
+                    Constants.locale.welcome,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -63,19 +62,20 @@ class LoginView extends StatelessWidget {
                     height: 40,
                   ),
                   Text(
-                    'E-mail',
+                    Constants.locale.email,
                     style: theme.textTheme.bodySmall,
                   ),
-                  CustomTextFormField(
+                  CustomTextFormField
+                    (
                     controller: emailController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return "you must enter your e-mail address";
+                        return Constants.locale.youMustEnterYourEmail;
                       }
 
                       return null;
                     },
-                    hintText: 'Enter your e-mail address',
+                    hintText: Constants.locale.enterYourEmailAddress,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
@@ -85,19 +85,19 @@ class LoginView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'Password',
+                    Constants.locale.password,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: passwordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return "you must enter your password !";
+                        return Constants.locale.youMustEnterYourPassword;
                       }
 
                       return null;
                     },
-                    hintText: 'Enter your password',
+                    hintText: Constants.locale.enterYourPassword,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
@@ -116,7 +116,20 @@ class LoginView extends StatelessWidget {
                         ).then((value) => {
                           if(value == true){
                             EasyLoading.dismiss(),
-                            Navigator.of(context).pushReplacementNamed(LayoutView.routeName),
+                            Navigator.of(context).pushReplacementNamed(PageRoutesName.layout),
+                          }
+                          else if(value == false){
+                            EasyLoading.dismiss(),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  Constants.locale.invalidEmailOrPassword,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ),
                           }
                         });
                       }
@@ -132,7 +145,7 @@ class LoginView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Login',
+                          Constants.locale.login,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: Colors.white,
                             fontSize: 16,
@@ -152,15 +165,16 @@ class LoginView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('OR  '),
+                       Text(Constants.locale.or),
+                      const Text(" "),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, RegisterView.routeName);
+                          Navigator.pushNamed(context, PageRoutesName.registration);
                         },
-                        child: const Text(
-                          'Create new account ? ',
+                        child:  Text(
+                          Constants.locale.createANewAccount,
                           style:
-                              TextStyle(decoration: TextDecoration.underline),
+                              const TextStyle(decoration: TextDecoration.underline),
                         ),
                       ),
                     ],

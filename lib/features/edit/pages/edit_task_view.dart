@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/config/constants/constants.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/core/widgets/text_form_field.dart';
-import 'package:todo_app/features/layout_view.dart';
 import 'package:todo_app/models/task_model.dart';
+import '../../../core/config/constants/page_routes.dart';
 import '../../../core/config/constants/settings_provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-class EditTask extends StatefulWidget {
-  const EditTask({Key? key}) : super(key: key);
-  static const String routeName = "edit";
+class EditTaskView extends StatefulWidget {
+  const EditTaskView({Key? key}) : super(key: key);
 
   @override
-  State<EditTask> createState() => _EditTaskState();
+  State<EditTaskView> createState() => _EditTaskViewState();
 }
 
-class _EditTaskState extends State<EditTask> {
+class _EditTaskViewState extends State<EditTaskView> {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
-    var locale = AppLocalizations.of(context)!;
     var taskModel = ModalRoute.of(context)?.settings.arguments as TaskModel;
 
     return Scaffold(
@@ -44,10 +41,10 @@ class _EditTaskState extends State<EditTask> {
                         color: Colors.white,
                       ),
                       onPressed: () => Navigator.popAndPushNamed(
-                          context, LayoutView.routeName),
+                          context,PageRoutesName.layout),
                     ),
                     Text(
-                      locale.todolist,
+                      Constants.locale.todolist,
                       style: theme.textTheme.titleLarge,
                     ),
                   ],
@@ -68,7 +65,7 @@ class _EditTaskState extends State<EditTask> {
                   children: [
                     Center(
                       child: Text(
-                        'Edit Your Task',
+                        Constants.locale.editYourTask,
                         style: theme.textTheme.bodyMedium?.copyWith(
                             color: vm.isDark() ? Colors.white : Colors.black),
                         textAlign: TextAlign.center,
@@ -82,7 +79,7 @@ class _EditTaskState extends State<EditTask> {
                       onChanged: (value) {
                         taskModel.title = value!;
                       },
-                      hintText: 'Task Title',
+                      hintText: Constants.locale.enterYourTaskTitle,
                       hintColor: Colors.grey.shade600,
                     ),
                     const SizedBox(
@@ -93,7 +90,7 @@ class _EditTaskState extends State<EditTask> {
                       onChanged: (value) {
                         taskModel.description = value!;
                       },
-                      hintText: 'Task description',
+                      hintText: Constants.locale.enterYourTaskDescription,
                       hintColor: Colors.grey.shade600,
                       maxLines: 3,
                       maxLength: 200,
@@ -102,7 +99,7 @@ class _EditTaskState extends State<EditTask> {
                       height: 16,
                     ),
                     Text(
-                      'Select Time',
+                      Constants.locale.selectTime,
                       style: theme.textTheme.bodyLarge?.copyWith(
                           color: vm.isDark()
                               ? const Color(0xffC3C3C3)
@@ -142,11 +139,10 @@ class _EditTaskState extends State<EditTask> {
                           FirebaseService().updateTask(taskModel);
                           Navigator.popAndPushNamed(
                               context,
-                              LayoutView
-                                  .routeName); // FirebaseService().updateTask(arguments);
+                              PageRoutesName.layout); // FirebaseService().updateTask(arguments);
                         },
                         child: Text(
-                          'Save Changes',
+                          Constants.locale.saveChanges,
                           textAlign: TextAlign.center,
                           style: theme.textTheme.bodyMedium
                               ?.copyWith(color: Colors.white),
