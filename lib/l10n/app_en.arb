@@ -23,8 +23,7 @@
 "editYourTask":"Edit Your Task",
 "saveChanges":"Save Changes",
 "close": "Close",
-"error": "Error",
-"success": "Success",
+"successLoggIn": "logged in successfully",
 "weakPassword": "Weak Password",
 "thePasswordProvidedIsTooWeak": "The password provided is too weak .",
 "emailAlreadyInUse": "Email is already in use",
@@ -46,6 +45,7 @@
 "light": "Light",
 "dark": "Dark",
 "accountSuccessfullyCreated":"Account successfully created",
-"accountCreationFailed":"Account creation failed"
+"accountCreationFailed":"Account creation failed",
+"deletedSuccessfully":"Deleted successfully"
 
 }

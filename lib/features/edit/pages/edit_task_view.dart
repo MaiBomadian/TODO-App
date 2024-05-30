@@ -53,7 +53,7 @@ class _EditTaskViewState extends State<EditTaskView> {
             ),
             Card(
               margin: const EdgeInsets.all(25),
-              color: Colors.white,
+              color: vm.isDark() ? const Color(0xff141922) : Colors.white,
               elevation: 6,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),

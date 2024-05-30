@@ -120,7 +120,7 @@ class LoginView extends StatelessWidget {
                         ).then((value) => {
                           if(value == true){
                             EasyLoading.dismiss(),
-                            SnackBarService.showSuccessMessage(locale.success,context),
+                            SnackBarService.showSuccessMessage(locale.successLoggIn,context),
                             Navigator.of(context).pushReplacementNamed(PageRoutesName.layout),
                           }
                           else if(value == false){

@@ -20,7 +20,7 @@ class SnackBarService {
               right: 24,
             ),
             decoration: BoxDecoration(
-              color: Colors.white60,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             child: msg.length > 80
@@ -52,17 +52,6 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(
-                        locale.success,
-                        textAlign: TextAlign.start,
-                        maxLines: 3,
-                        style: const TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
                       Text(
                         msg,
                         textAlign: TextAlign.start,
@@ -122,17 +111,6 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(
-                        locale.success,
-                        textAlign: TextAlign.start,
-                        maxLines: 3,
-                        style:const TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
                       Text(
                         msg,
                         textAlign: TextAlign.start,
@@ -157,7 +135,7 @@ class SnackBarService {
                     icon:  Text(
                      locale.close,
                       textAlign: TextAlign.center,
-                      style:const TextStyle(color: Colors.black54),
+                      style:const TextStyle(color: Colors.black54,fontSize: 12),
                     ),
                   ),
                 ),
@@ -189,7 +167,7 @@ class SnackBarService {
               right: 24,
             ),
             decoration: BoxDecoration(
-              color: Colors.white60,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             child: msg.length > 80
@@ -221,17 +199,6 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(
-                         locale.error,
-                        textAlign: TextAlign.start,
-                        maxLines: 3,
-                        style: const TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
                       Text(
                         msg,
                         textAlign: TextAlign.start,
@@ -291,17 +258,6 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(
-                        locale.error,
-                        textAlign: TextAlign.start,
-                        maxLines: 3,
-                        style: const TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
                       Text(
                         msg,
                         textAlign: TextAlign.start,
@@ -326,7 +282,7 @@ class SnackBarService {
                     icon:  Text(
                     locale.close,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.black54),
+                      style:const TextStyle(color: Colors.black54,fontSize: 12),
                     ),
                   ),
                 ),

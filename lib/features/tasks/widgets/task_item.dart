@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:todo_app/core/services/snack_bar_services.dart';
 import 'package:todo_app/models/task_model.dart';
 
 import '../../../core/config/constants/settings_provider.dart';
@@ -39,6 +40,7 @@ class CustomTaskItem extends StatelessWidget {
                 FirebaseService().deleteTask(taskModel).then(
                       (value) => EasyLoading.dismiss(),
                     );
+                SnackBarService.showSuccessMessage(locale.deletedSuccessfully, context);
               },
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
