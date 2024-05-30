@@ -45,7 +45,7 @@
 "done": "Done !",
 "light": "Light",
 "dark": "Dark",
-"english": "English",
-"arabic": "Arabic"
+"accountSuccessfullyCreated":"Account successfully created",
+"accountCreationFailed":"Account creation failed"
 
 }

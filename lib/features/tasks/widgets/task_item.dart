@@ -3,10 +3,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/core/config/constants/constants.dart';
 import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
-import 'package:todo_app/features/edit/pages/edit_task_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/models/task_model.dart';
 
 import '../../../core/config/constants/settings_provider.dart';
@@ -21,6 +20,7 @@ class CustomTaskItem extends StatelessWidget {
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
     var mediaQuery = MediaQuery.of(context).size;
+    var locale =AppLocalizations.of(context)!;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -43,7 +43,7 @@ class CustomTaskItem extends StatelessWidget {
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,
-              label: Constants.locale.delete,
+              label: locale.delete,
               borderRadius: BorderRadius.circular(15),
             ),
           ],
@@ -121,7 +121,7 @@ class CustomTaskItem extends StatelessWidget {
                 const SizedBox(width: 10),
                 if (taskModel.isDone)
                   Text(
-                    Constants.locale.done,
+                    locale.done,
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: taskModel.isDone
                           ? const Color(0xff61E757)

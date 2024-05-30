@@ -1,10 +1,12 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:todo_app/core/config/constants/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SnackBarService {
-  static void showSuccessMessage(String msg) {
+  static void showSuccessMessage(String msg,context) {
+    var locale =AppLocalizations.of(context)!;
+
     BotToast.showCustomNotification(
       toastBuilder: (void Function() cancelFunc) {
         return Material(
@@ -51,7 +53,7 @@ class SnackBarService {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                        Text(
-                        Constants.locale.success,
+                        locale.success,
                         textAlign: TextAlign.start,
                         maxLines: 3,
                         style: const TextStyle(
@@ -83,7 +85,7 @@ class SnackBarService {
                   child: IconButton(
                     onPressed: cancelFunc,
                     icon:  Text(
-                      Constants.locale.close,
+                      locale.close,
                       textAlign: TextAlign.center,
                       style: const TextStyle(color: Colors.black54),
                     ),
@@ -120,11 +122,11 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Success",
+                       Text(
+                        locale.success,
                         textAlign: TextAlign.start,
                         maxLines: 3,
-                        style: TextStyle(
+                        style:const TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -152,10 +154,10 @@ class SnackBarService {
                   flex: 1,
                   child: IconButton(
                     onPressed: cancelFunc,
-                    icon: const Text(
-                      "close",
+                    icon:  Text(
+                     locale.close,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black54),
+                      style:const TextStyle(color: Colors.black54),
                     ),
                   ),
                 ),
@@ -171,7 +173,9 @@ class SnackBarService {
     );
   }
 
-  static void showErrorMessage(String msg) {
+  static void showErrorMessage(String msg,context) {
+    var locale =AppLocalizations.of(context)!;
+
     BotToast.showCustomNotification(
       toastBuilder: (void Function() cancelFunc) {
         return Material(
@@ -204,7 +208,7 @@ class SnackBarService {
                 Expanded(
                   flex: 1,
                   child: Lottie.asset(
-                    "assets/icons/wrong.json",
+                    "assets/icons/face_wrong_icon.json",
                     repeat: true,
                     height: 250,
                     width: 250,
@@ -217,11 +221,11 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Error",
+                       Text(
+                         locale.error,
                         textAlign: TextAlign.start,
                         maxLines: 3,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -249,10 +253,10 @@ class SnackBarService {
                   flex: 1,
                   child: IconButton(
                     onPressed: cancelFunc,
-                    icon: const Text(
-                      "close",
+                    icon:  Text(
+                      locale.close,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black54),
+                      style: const TextStyle(color: Colors.black54),
                     ),
                   ),
                 ),
@@ -287,11 +291,11 @@ class SnackBarService {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Error",
+                       Text(
+                        locale.error,
                         textAlign: TextAlign.start,
                         maxLines: 3,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -319,10 +323,10 @@ class SnackBarService {
                   flex: 1,
                   child: IconButton(
                     onPressed: cancelFunc,
-                    icon: const Text(
-                      "close",
+                    icon:  Text(
+                    locale.close,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black54),
+                      style: const TextStyle(color: Colors.black54),
                     ),
                   ),
                 ),

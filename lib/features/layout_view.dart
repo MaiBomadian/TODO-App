@@ -4,7 +4,7 @@ import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/features/task_bottom_sheet.dart';
 
 class LayoutView extends StatelessWidget {
-  const LayoutView({Key? key}) : super(key: key);
+  const LayoutView({super.key});
 
   @override
   Widget build(BuildContext context) {

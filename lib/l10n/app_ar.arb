@@ -45,9 +45,7 @@
 "done": "منتهي !",
 "light": "فاتح",
 "dark": "داكن",
-"english": "إنجليزي",
-"arabic": "عربي"
-
-
+"accountSuccessfullyCreated": "تم إنشاء الحساب بنجاح",
+"accountCreationFailed":"فشل إنشاء الحساب"
 
 }

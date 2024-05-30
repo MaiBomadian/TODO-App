@@ -7,11 +7,7 @@ import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/config/constants/routes.dart';
 import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/core/services/loading_service.dart';
-import 'package:todo_app/features/edit/pages/edit_task_view.dart';
-import 'package:todo_app/features/layout_view.dart';
-import 'package:todo_app/features/login/pages/login_view.dart';
-import 'package:todo_app/features/register/pages/register_view.dart';
-import 'package:todo_app/features/splash/pages/splash_view.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -41,16 +37,15 @@ class TodoApp extends StatelessWidget {
       ),
       navigatorKey: navigatorKey,
       navigatorObservers: [BotToastNavigatorObserver()],
-      locale: Locale(vm.currentLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale(vm.currentLanguage),
       debugShowCheckedModeBanner: false,
       themeMode: vm.currentTheme,
       theme: ApplicationThemeManager.lightTheme,
       darkTheme: ApplicationThemeManager.darkTheme,
       initialRoute: PageRoutesName.splash,
       onGenerateRoute: Routes.onGenerate,
-
     );
   }
 }
