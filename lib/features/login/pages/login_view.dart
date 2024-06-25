@@ -12,9 +12,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginView extends StatelessWidget {
   LoginView({super.key});
 
-  var formKey = GlobalKey<FormState>();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  // var formKey = GlobalKey<FormState>();
+  // var emailController = TextEditingController();
+  // var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class LoginView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 28.0),
             child: Form(
-              key: formKey,
+              key: vm.loginFormKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -70,7 +70,7 @@ class LoginView extends StatelessWidget {
                   ),
                   CustomTextFormField
                     (
-                    controller: emailController,
+                    controller: vm.emailController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return locale.youMustEnterYourEmail;
@@ -92,7 +92,7 @@ class LoginView extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
-                    controller: passwordController,
+                    controller: vm.passwordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return locale.youMustEnterYourPassword;
@@ -112,10 +112,10 @@ class LoginView extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                      if (vm.loginFormKey.currentState!.validate()) {
                         FirebaseService().signInWithUserAccount(
-                          emailController.text,
-                          passwordController.text,
+                          vm.emailController.text,
+                          vm.passwordController.text,
                           context
                         ).then((value) => {
                           if(value == true){

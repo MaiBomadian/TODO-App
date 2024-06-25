@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/core/config/constants/page_routes.dart';
+import 'package:todo_app/main.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,6 +19,8 @@ class FirebaseService {
         email: emailAddress,
         password: password,
       );
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userEmail', credential.user?.email ?? "");
       print(credential.user?.email);
       return (Future.value(true));
     } on FirebaseAuthException catch (e) {
@@ -42,6 +47,9 @@ class FirebaseService {
       EasyLoading.show();
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userEmail', credential.user?.email ?? "");
+
       print(credential.user?.email);
       return (Future.value(true));
     } on FirebaseAuthException catch (e) {
@@ -53,6 +61,38 @@ class FirebaseService {
         EasyLoading.dismiss();
       }
       return (Future.value(false));
+    }
+  }
+
+ Future<void> signOut() async{
+    try {
+      EasyLoading.show();
+       await FirebaseAuth.instance.signOut();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove('userEmail');
+    } on FirebaseAuthException catch (e) {
+      EasyLoading.dismiss();
+    }
+  }
+
+
+  Future<void> checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? uid = prefs.getString('userEmail');
+
+    if (uid != null) {
+
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+
+          prefs.remove('userEmail');
+        } else {
+
+          Navigator.pushReplacementNamed(navigatorKey.currentState!.context, PageRoutesName.layout);
+        }
+      });
+    } else {
+      Navigator.pushReplacementNamed(navigatorKey.currentState!.context, PageRoutesName.login);
     }
   }
 

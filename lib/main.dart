@@ -19,15 +19,25 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(ChangeNotifierProvider(
-    create: (context) => SettingsProvider()..getLanguage()..getTheme(),
+    create: (context) => SettingsProvider()..getLanguage()..getTheme()..checkCurrentUser(),
     child: const TodoApp(),
   ));
   configLoading();
 }
 
-class TodoApp extends StatelessWidget {
+class TodoApp extends StatefulWidget {
   const TodoApp({Key? key}) : super(key: key);
 
+  @override
+  State<TodoApp> createState() => _TodoAppState();
+}
+
+class _TodoAppState extends State<TodoApp> {
+  @override
+  void initState() {
+    super.initState();
+    SettingsProvider().checkCurrentUser();
+  }
   @override
   Widget build(BuildContext context) {
     var vm = Provider.of<SettingsProvider>(context);

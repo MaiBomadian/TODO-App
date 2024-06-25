@@ -5,6 +5,7 @@
 "mode": "Mode",
 "welcome": "Welcome back!",
 "login": "Login",
+"signOut": "Sign out",
 "email":"E-mail",
 "password":"Password",
 "or": "OR ",
