@@ -1,4 +1,4 @@
-class TaskModel {
+ class TaskModel {
   String? id;
   String title;
   String description;

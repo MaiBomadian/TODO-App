@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
-import '../../../core/config/constants/constants.dart';
+import '../../../core/config/constants/page_routes.dart';
 import '../../../core/config/constants/settings_provider.dart';
+import '../../../core/services/snack_bar_services.dart';
 import '../../../core/widgets/text_form_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LoginView extends StatelessWidget {
-  LoginView({Key? key}) : super(key: key);
+  LoginView({super.key});
 
-  var formKey = GlobalKey<FormState>();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  // var formKey = GlobalKey<FormState>();
+  // var emailController = TextEditingController();
+  // var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
+    var locale =AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.only(top: 28),
@@ -35,7 +38,7 @@ class LoginView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            Constants.locale.login,
+            locale.login,
             style: theme.textTheme.titleLarge,
           ),
           centerTitle: true,
@@ -44,7 +47,7 @@ class LoginView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 28.0),
             child: Form(
-              key: formKey,
+              key: vm.loginFormKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -52,7 +55,7 @@ class LoginView extends StatelessWidget {
                     height: mediaQuery.height * .2,
                   ),
                   Text(
-                    Constants.locale.welcome,
+                    locale.welcome,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -62,20 +65,20 @@ class LoginView extends StatelessWidget {
                     height: 40,
                   ),
                   Text(
-                    Constants.locale.email,
+                    locale.email,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField
                     (
-                    controller: emailController,
+                    controller: vm.emailController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return Constants.locale.youMustEnterYourEmail;
+                        return locale.youMustEnterYourEmail;
                       }
 
                       return null;
                     },
-                    hintText: Constants.locale.enterYourEmailAddress,
+                    hintText: locale.enterYourEmailAddress,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
@@ -85,19 +88,19 @@ class LoginView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    Constants.locale.password,
+                    locale.password,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
-                    controller: passwordController,
+                    controller: vm.passwordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return Constants.locale.youMustEnterYourPassword;
+                        return locale.youMustEnterYourPassword;
                       }
 
                       return null;
                     },
-                    hintText: Constants.locale.enterYourPassword,
+                    hintText: locale.enterYourPassword,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
@@ -109,27 +112,21 @@ class LoginView extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                      if (vm.loginFormKey.currentState!.validate()) {
                         FirebaseService().signInWithUserAccount(
-                          emailController.text,
-                          passwordController.text,
+                          vm.emailController.text,
+                          vm.passwordController.text,
+                          context
                         ).then((value) => {
                           if(value == true){
                             EasyLoading.dismiss(),
+                            SnackBarService.showSuccessMessage(locale.successLoggIn,context),
                             Navigator.of(context).pushReplacementNamed(PageRoutesName.layout),
                           }
                           else if(value == false){
                             EasyLoading.dismiss(),
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  Constants.locale.invalidEmailOrPassword,
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            SnackBarService.showErrorMessage(locale.invalidEmailOrPassword,context),
+
                           }
                         });
                       }
@@ -145,7 +142,7 @@ class LoginView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          Constants.locale.login,
+                         locale.login,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: Colors.white,
                             fontSize: 16,
@@ -165,14 +162,14 @@ class LoginView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(Constants.locale.or),
+                       Text(locale.or),
                       const Text(" "),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, PageRoutesName.registration);
                         },
                         child:  Text(
-                          Constants.locale.createANewAccount,
+                          locale.createANewAccount,
                           style:
                               const TextStyle(decoration: TextDecoration.underline),
                         ),

@@ -5,6 +5,7 @@
 "mode": "النمط",
 "welcome": "مرحبًا بعودتك ",
 "login":"تسجيل الدخول",
+"signOut": "تسجيل الخروج",
 "email":"بريد إلكتروني",
 "password":"كلمة المرور",
 "or": "أو",
@@ -23,8 +24,7 @@
 "editYourTask":"تعديل مهمتك",
 "saveChanges":"حفظ التغييرات",
 "close": "إغلاق",
-"error": "خطأ",
-"success": "النجاح",
+"successLoggIn": "تم تسجيل الدخول بنجاح",
 "weakPassword": "كلمة مرور ضعيفة",
 "thePasswordProvidedIsTooWeak": "كلمة المرور المقدمة ضعيفة جدًا",
 "emailAlreadyInUse": "البريد الإلكتروني قيد الاستخدام بالفعل",
@@ -45,9 +45,9 @@
 "done": "منتهي !",
 "light": "فاتح",
 "dark": "داكن",
-"english": "إنجليزي",
-"arabic": "عربي"
-
+"accountSuccessfullyCreated": "تم إنشاء الحساب بنجاح",
+"accountCreationFailed":"فشل إنشاء الحساب",
+"deletedSuccessfully":"تم الحذف بنجاح"
 
 
 }

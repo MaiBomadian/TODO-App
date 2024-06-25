@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/features/settings/pages/settings_view.dart';
@@ -8,6 +9,12 @@ class SettingsProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
   int currentIndex = 0;
   String currentLanguage = 'en';
+
+
+  var loginFormKey = GlobalKey<FormState>();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   DateTime selectedDate = DateTime.now();
   List<Widget> screens = [
     const TasksView(),
@@ -75,4 +82,19 @@ class SettingsProvider extends ChangeNotifier {
   bool isDark() {
     return currentTheme == ThemeMode.dark;
   }
+  clear(){
+    emailController.clear();
+    passwordController.clear();
+    notifyListeners();
+  }
+
+  Future<void> checkCurrentUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      emailController.text = prefs.getString('userEmail') ?? "";
+      notifyListeners();
+    }
+  }
+
 }

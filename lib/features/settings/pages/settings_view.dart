@@ -1,11 +1,14 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/core/config/constants/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:todo_app/core/config/constants/page_routes.dart';
 import '../../../../core/config/constants/settings_provider.dart';
+import '../../../core/services/firebase_services.dart';
 
 class SettingsView extends StatelessWidget {
-  SettingsView({Key? key}) : super(key: key);
+  SettingsView({super.key});
   final List<String> language = ['English', 'عربي'];
   final List<String> themeList = [
     'Light',
@@ -17,6 +20,7 @@ class SettingsView extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
+    var locale =AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +32,7 @@ class SettingsView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 51, vertical: 60),
             child: Text(
-              Constants.locale.settings,
+              locale.settings,
               style: theme.textTheme.titleLarge,
             ),
           ),
@@ -37,7 +41,7 @@ class SettingsView extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
-            Constants.locale.language,
+           locale.language,
             style: theme.textTheme.bodySmall
                 ?.copyWith(fontWeight: FontWeight.w700),
           ),
@@ -83,7 +87,7 @@ class SettingsView extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 38, top: 20, bottom: 20, right: 30),
           child: Text(
-            Constants.locale.mode,
+            locale.mode,
             style: theme.textTheme.bodySmall
                 ?.copyWith(fontWeight: FontWeight.w700),
           ),
@@ -91,6 +95,8 @@ class SettingsView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 50.0, right: 40),
           child: CustomDropdown(
+            initialItem: vm.currentTheme == ThemeMode.dark ? 'Dark' : 'Light',
+
             decoration: CustomDropdownDecoration(
 
               closedBorder: Border.all(color: theme.primaryColor),
@@ -117,7 +123,6 @@ class SettingsView extends StatelessWidget {
                 color: theme.primaryColor,
               ),
             ),
-            initialItem: vm.currentTheme == ThemeMode.dark ? 'Dark' : 'Light',
             items: themeList,
             onChanged: (value) {
               if (value == 'Dark') {
@@ -126,6 +131,44 @@ class SettingsView extends StatelessWidget {
                 vm.changeTheme(ThemeMode.light);
               }
             },
+          ),
+        ),
+        const SizedBox(
+          height: 80,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ElevatedButton(
+            onPressed: () {
+              FirebaseService().signOut();
+              EasyLoading.dismiss();
+                Navigator.pushReplacementNamed(context, PageRoutesName.login);
+                vm.clear();
+            },
+            style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12, horizontal: 24),
+                backgroundColor: theme.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  locale.signOut,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                const Icon(
+                  Icons.exit_to_app,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ],
+            ),
           ),
         ),
         ],

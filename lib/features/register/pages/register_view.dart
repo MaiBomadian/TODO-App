@@ -5,12 +5,12 @@ import 'package:todo_app/core/config/constants/page_routes.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/config/constants/constants.dart';
 import '../../../core/config/constants/settings_provider.dart';
+import '../../../core/services/snack_bar_services.dart';
 import '../../../core/widgets/text_form_field.dart';
 
 class RegisterView extends StatelessWidget {
-  RegisterView({Key? key}) : super(key: key);
+  RegisterView({super.key});
 
   var formKey = GlobalKey<FormState>();
 
@@ -27,6 +27,7 @@ class RegisterView extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
+    var locale =AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.only(top: 28),
@@ -43,7 +44,7 @@ class RegisterView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            Constants.locale.createAccount,
+            locale.createAccount,
             style: theme.textTheme.titleLarge,
           ),
           centerTitle: true,
@@ -60,18 +61,18 @@ class RegisterView extends StatelessWidget {
                     height: mediaQuery.height * .2,
                   ),
                   Text(
-                    Constants.locale.fullName,
+                   locale.fullName,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return Constants.locale.enterYourFullName;
+                        return locale.enterYourFullName;
                       }
                       return null;
                     },
                     controller: nameController,
-                    hintText: Constants.locale.enterYourFullName,
+                    hintText:locale.enterYourFullName,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
@@ -81,23 +82,23 @@ class RegisterView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    Constants.locale.email,
+                    locale.email,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: emailController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return Constants.locale.youMustEnterYourEmail;
+                        return locale.youMustEnterYourEmail;
                       }
                       var regex = RegExp(
                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                       if (!regex.hasMatch(value)) {
-                        return Constants.locale.invalidEmailAddress;
+                        return locale.invalidEmailAddress;
                       }
                       return null;
                     },
-                    hintText: Constants.locale.enterYourEmailAddress,
+                    hintText: locale.enterYourEmailAddress,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.emailAddress,
@@ -107,23 +108,23 @@ class RegisterView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    Constants.locale.password,
+                    locale.password,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: passwordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return Constants.locale.youMustEnterYourPassword;
+                        return locale.youMustEnterYourPassword;
                       }
                       var regex = RegExp(
                           r"(?=^.{8,}$)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$");
                       if (!regex.hasMatch(value)) {
-                        return Constants.locale.invalidPassword;
+                        return locale.thePasswordProvidedIsTooWeak;
                       }
                       return null;
                     },
-                    hintText: Constants.locale.enterYourPassword,
+                    hintText: locale.enterYourPassword,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
@@ -134,21 +135,21 @@ class RegisterView extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    Constants.locale.confirmPassword,
+                    locale.confirmPassword,
                     style: theme.textTheme.bodySmall,
                   ),
                   CustomTextFormField(
                     controller: confirmPasswordController,
                     onValidate: (value) {
                       if (value == null || value.trim().isEmpty) {
-                        return Constants.locale.youMustEnterYourPassword;
+                        return locale.youMustEnterYourPassword;
                       }
                       if (value != passwordController.text) {
-                        return Constants.locale.passwordDoesNotMatch;
+                        return locale.passwordDoesNotMatch;
                       }
                       return null;
                     },
-                    hintText: Constants.locale.confirmPassword,
+                    hintText: locale.confirmPassword,
                     hintColor:
                         vm.isDark() ? Colors.grey.shade600 : Colors.black54,
                     keyboardType: TextInputType.visiblePassword,
@@ -165,16 +166,22 @@ class RegisterView extends StatelessWidget {
                             .createUserAccount(
                               emailController.text,
                               passwordController.text,
+                          context
                             )
                             .then((value) => {
                                   if (value == true)
                                     {
                                       EasyLoading.dismiss(),
+                                      SnackBarService.showSuccessMessage(locale.accountSuccessfullyCreated,context),
                                       Navigator.pushNamedAndRemoveUntil(
                                           context,
                                           PageRoutesName.login,
                                           (route) => false)
                                     }
+                                  else{
+                                    EasyLoading.dismiss(),
+                                    SnackBarService.showErrorMessage(locale.accountCreationFailed,context),
+                                  }
                                 });
                       }
                     },
@@ -190,7 +197,7 @@ class RegisterView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          Constants.locale.createAccount,
+                         locale.createAccount,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: Colors.white,
                             fontSize: 16,

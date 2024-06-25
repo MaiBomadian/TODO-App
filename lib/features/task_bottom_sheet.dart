@@ -6,7 +6,7 @@ import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/models/task_model.dart';
 
-import '../core/config/constants/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../core/widgets/text_form_field.dart';
 
 class TaskBottomSheet extends StatefulWidget {
@@ -28,6 +28,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
     var theme = Theme.of(context);
     var mediaQuery = MediaQuery.of(context).size;
     var vm = Provider.of<SettingsProvider>(context);
+    var locale =AppLocalizations.of(context)!;
 
     return Container(
       width: mediaQuery.width,
@@ -45,7 +46,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              Constants.locale.addNewTask,
+              locale.addNewTask,
               style:
                   TextStyle(color: vm.isDark() ? Colors.white : Colors.black),
               textAlign: TextAlign.center,
@@ -55,11 +56,11 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
             ),
             CustomTextFormField(
               controller: titleController,
-              hintText: Constants.locale.enterYourTaskTitle,
+              hintText: locale.enterYourTaskTitle,
               hintColor: Colors.grey.shade600,
               onValidate: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return Constants.locale.thisFieldIsRequired;
+                  return locale.thisFieldIsRequired;
                 }
                 return null;
               },
@@ -69,13 +70,13 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
             ),
             CustomTextFormField(
               controller: descriptionController,
-              hintText: Constants.locale.enterYourTaskDescription,
+              hintText: locale.enterYourTaskDescription,
               hintColor: Colors.grey.shade600,
               maxLines: 3,
               maxLength: 200,
               onValidate: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return Constants.locale.thisFieldIsRequired;
+                  return locale.thisFieldIsRequired;
                 }
                 return null;
               },
@@ -84,7 +85,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
               height: 16,
             ),
             Text(
-              Constants.locale.selectTime,
+              locale.selectTime,
               style: theme.textTheme.bodyLarge?.copyWith(
                   color: vm.isDark() ? const Color(0xffC3C3C3) : Colors.black),
             ),
@@ -128,7 +129,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 }
               },
               child: Text(
-                Constants.locale.addTask,
+                locale.addTask,
                 textAlign: TextAlign.center,
                 style:
                     theme.textTheme.bodyMedium?.copyWith(color: Colors.white),

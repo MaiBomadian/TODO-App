@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/core/config/constants/constants.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/core/widgets/text_form_field.dart';
 import 'package:todo_app/models/task_model.dart';
 import '../../../core/config/constants/page_routes.dart';
 import '../../../core/config/constants/settings_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditTaskView extends StatefulWidget {
-  const EditTaskView({Key? key}) : super(key: key);
+  const EditTaskView({super.key});
 
   @override
   State<EditTaskView> createState() => _EditTaskViewState();
@@ -22,7 +22,7 @@ class _EditTaskViewState extends State<EditTaskView> {
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
     var taskModel = ModalRoute.of(context)?.settings.arguments as TaskModel;
-
+  var  locale = AppLocalizations.of(context)!;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -44,7 +44,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                           context,PageRoutesName.layout),
                     ),
                     Text(
-                      Constants.locale.todolist,
+                     locale.todolist,
                       style: theme.textTheme.titleLarge,
                     ),
                   ],
@@ -53,7 +53,7 @@ class _EditTaskViewState extends State<EditTaskView> {
             ),
             Card(
               margin: const EdgeInsets.all(25),
-              color: Colors.white,
+              color: vm.isDark() ? const Color(0xff141922) : Colors.white,
               elevation: 6,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
@@ -65,7 +65,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                   children: [
                     Center(
                       child: Text(
-                        Constants.locale.editYourTask,
+                        locale.editYourTask,
                         style: theme.textTheme.bodyMedium?.copyWith(
                             color: vm.isDark() ? Colors.white : Colors.black),
                         textAlign: TextAlign.center,
@@ -79,7 +79,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                       onChanged: (value) {
                         taskModel.title = value!;
                       },
-                      hintText: Constants.locale.enterYourTaskTitle,
+                      hintText: locale.enterYourTaskTitle,
                       hintColor: Colors.grey.shade600,
                     ),
                     const SizedBox(
@@ -90,7 +90,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                       onChanged: (value) {
                         taskModel.description = value!;
                       },
-                      hintText: Constants.locale.enterYourTaskDescription,
+                      hintText: locale.enterYourTaskDescription,
                       hintColor: Colors.grey.shade600,
                       maxLines: 3,
                       maxLength: 200,
@@ -99,7 +99,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                       height: 16,
                     ),
                     Text(
-                      Constants.locale.selectTime,
+                      locale.selectTime,
                       style: theme.textTheme.bodyLarge?.copyWith(
                           color: vm.isDark()
                               ? const Color(0xffC3C3C3)
@@ -142,7 +142,7 @@ class _EditTaskViewState extends State<EditTaskView> {
                               PageRoutesName.layout); // FirebaseService().updateTask(arguments);
                         },
                         child: Text(
-                          Constants.locale.saveChanges,
+                          locale.saveChanges,
                           textAlign: TextAlign.center,
                           style: theme.textTheme.bodyMedium
                               ?.copyWith(color: Colors.white),

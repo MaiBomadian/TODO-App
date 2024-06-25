@@ -6,7 +6,6 @@ import 'package:todo_app/core/config/constants/settings_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/core/services/firebase_services.dart';
 import 'package:todo_app/models/task_model.dart';
-import '../../../core/config/constants/constants.dart';
 import '../widgets/task_item.dart';
 
 class TasksView extends StatefulWidget {
@@ -24,6 +23,8 @@ class _TasksViewState extends State<TasksView> {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var vm = Provider.of<SettingsProvider>(context);
+    var locale =AppLocalizations.of(context)!;
+
     return Column(children: [
       Stack(
         alignment: const Alignment(0, 2.0),
@@ -36,7 +37,7 @@ class _TasksViewState extends State<TasksView> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 51, vertical: 60),
               child: Text(
-                Constants.locale.todolist,
+                locale.todolist,
                 style: theme.textTheme.titleLarge,
               ),
             ),
@@ -109,7 +110,7 @@ class _TasksViewState extends State<TasksView> {
               return  Column(
                 children: [
                   Text(
-                    Constants.locale.somethingWentWrong,
+                   locale.somethingWentWrong,
                   ),
                   const SizedBox(height: 20),
                   const Icon(Icons.refresh),

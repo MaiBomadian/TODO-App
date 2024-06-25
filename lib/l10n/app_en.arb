@@ -5,6 +5,7 @@
 "mode": "Mode",
 "welcome": "Welcome back!",
 "login": "Login",
+"signOut": "Sign out",
 "email":"E-mail",
 "password":"Password",
 "or": "OR ",
@@ -23,8 +24,7 @@
 "editYourTask":"Edit Your Task",
 "saveChanges":"Save Changes",
 "close": "Close",
-"error": "Error",
-"success": "Success",
+"successLoggIn": "logged in successfully",
 "weakPassword": "Weak Password",
 "thePasswordProvidedIsTooWeak": "The password provided is too weak .",
 "emailAlreadyInUse": "Email is already in use",
@@ -45,7 +45,8 @@
 "done": "Done !",
 "light": "Light",
 "dark": "Dark",
-"english": "English",
-"arabic": "Arabic"
+"accountSuccessfullyCreated":"Account successfully created",
+"accountCreationFailed":"Account creation failed",
+"deletedSuccessfully":"Deleted successfully"
 
 }
