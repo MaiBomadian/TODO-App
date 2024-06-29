@@ -1,16 +1,27 @@
-# todo_app
+# ToDo_App
+ToDo App developed with the versatile Flutter framework.
 
-A new Flutter project.
+## LightMode 
+![LightMode](https://github.com/HashirSaudKhan/Todo-App/assets/93030144/6ad643fe-f2c6-474e-9e4a-7294d3d3cd69)
+## DarkMode 
+![DarkMode](https://github.com/HashirSaudKhan/Todo-App/assets/93030144/5c768d2e-15c8-418f-897f-90b9cd4b7eff)
+## Language : Arabic
+![Arabic](https://github.com/HashirSaudKhan/Todo-App/assets/93030144/d44a3ad2-7616-4d33-a8c6-95ca298eefb9)
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- 🔒 Firebase Authentication: Secure and seamless user authentication.
 
-A few resources to get you started if this is your first Flutter project:
+- 💾 Firestore Integration: Robust and scalable database for managing tasks.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 📝 Task Management: Easily create, edit, delete, and update tasks to keep your day organized.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ⚙️ Settings: Customize your experience with two themes (light and dark) and language options for Arabic and English.
+
+- 👤 Account Management: Users can create accounts to manage their tasks.
+
+- 🔄 State Management: Efficient state management using the Provider package.
+
+- 📌 User Preferences: Persistent user login and settings using Shared Preferences.
+
+- 📲 Cross-Platform: Available on both Android and iOS.
